@@ -1,1 +1,1 @@
-." Hello from Forth" CR
+: ART ."     +^+" CR ." (\   _   /)" CR ." ( \ ( ) / )" CR ." (         )" CR ."  `>     <'" CR ."  /       \ " CR ."   `_   _'" CR ."     '_'" CR ;
