@@ -1,1 +1,5 @@
-echo "Hello from Nim"
+proc main = 
+    echo "Hello from Nim"
+
+when isMainModule:
+    main()
