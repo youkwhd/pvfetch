@@ -6,11 +6,7 @@ Tiny program to fetch system info.
 Build & Run
 -----------
 
-To build the program, invoke:
+To build the program, invoke either:
     
-    ./build.sh
-
-Building the executable usually takes time, blame Factor. You can
-instead run it by invoking:
-
-    ./pvfetch
+    ./build.sh 
+    ./build.sh -d:release
