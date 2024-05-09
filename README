@@ -2,3 +2,15 @@ Puss Fetch
 ==========
 
 Tiny program to fetch system info.
+
+Build & Run
+-----------
+
+To build the program, invoke:
+    
+    ./build.sh
+
+Building the executable usually takes time, blame Factor. You can
+instead run it by invoking:
+
+    ./pvfetch
