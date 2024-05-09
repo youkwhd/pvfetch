@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nim c pvfetch.nim
+nim c $@ pvfetch.nim
