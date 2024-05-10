@@ -22,7 +22,10 @@ proc getHostname*: string =
 
 proc getUptime*: tuple[days, hours, minutes: int] =
   # In seconds
-  let uptime = readFile("/proc/uptime").strip().split(" ")[0].parseFloat()
+  let uptime = readFile("/proc/uptime")
+                .strip()
+                .split(" ")[0]
+                .parseFloat()
 
   # One .. represented in seconds
   let minuteInSecond: float = 60 * 1
