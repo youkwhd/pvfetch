@@ -10,3 +10,10 @@ To build the program, invoke either:
     
     ./build.sh 
     ./build.sh -d:release
+
+Similiar Softwares
+------------------
+
+bunnyfetch :: <https://github.com/Rosettea/bunnyfetch>
+disfetch   :: <https://q60.github.io/disfetch>
+pfetcth    :: <https://github.com/dylanaraps/pfetch>
