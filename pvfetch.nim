@@ -6,8 +6,14 @@ proc main =
 
   let username = getUsername()
   let hostname = getHostname()
+  let kernelVersion = getKernelVersion()
+  let arch = getArchitecture()
+  let shell = getShell()
 
   echo username, "@", hostname
+  echo kernelVersion
+  echo arch
+  echo shell
   
   for line in kitty:
     echo line
