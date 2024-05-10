@@ -1,4 +1,4 @@
-import std/streams
+import std/streams, extension/sequtils
 
 type Kitty* = seq[string]
 
@@ -15,3 +15,6 @@ proc newKitty*(fpath: string): Kitty =
 
   fstream.close()
   return kitty
+
+proc longestLine*(kitty: Kitty): int =
+  return kitty.reduce(proc (line: string, val: int): int = max(len(line), val), 0)
