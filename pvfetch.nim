@@ -9,11 +9,13 @@ proc main =
   let kernelVersion = getKernelVersion()
   let arch = getArchitecture()
   let shell = getShell()
+  let uptime = getUptime()
 
   echo username, "@", hostname
   echo kernelVersion
   echo arch
   echo shell
+  echo uptime
   
   for line in kitty:
     echo line
