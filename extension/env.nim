@@ -5,9 +5,6 @@ proc parseEnv*(str: string): TableRef[string, string] =
   let lines: seq[string] = str.splitLines()
 
   for line in lines:
-    if line == "":
-        break
-
     var split = line.split('=', 1)
     split[1].removePrefix("\"")
     split[1].removeSuffix("\"")
