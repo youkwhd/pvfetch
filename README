@@ -1,6 +1,12 @@
 Puss Fetch
 ==========
 
+             youkwhd@severus
+             OS      Arch Linux
+  (>" "<)    Kernel  6.8.9-arch1-1
+  ( =''=)    Shell   zsh
+  c(")-(").  WM      dwm
+
 Tiny program to fetch system info.
 
 Build & Run
