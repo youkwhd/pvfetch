@@ -33,4 +33,4 @@ proc getUptime*: tuple[days, hours, minutes: int] =
   let hours = floor((uptime - (days * dayInSecond)) / hourInSecond)
   let minutes = floor((uptime - (days * dayInSecond) - (hours * hourInSecond)) / minuteInSecond)
 
-  return (int(floor(days)), int(floor(hours)), int(floor(minutes)))
+  return (int(days), int(hours), int(minutes))
