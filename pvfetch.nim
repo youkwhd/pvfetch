@@ -30,5 +30,7 @@ proc main =
     stdout.write repeat(" ", (longestSysinfoLabel - len(sysinfo[i + n].label) + int(MARGIN_RIGHT))).join()
     stdout.write sysinfo[i + n].value, "\n"
 
+  stdout.write "\n"
+
 when isMainModule:
   main()
