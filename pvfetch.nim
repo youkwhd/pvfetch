@@ -7,16 +7,21 @@ proc main =
   let longestLine = kitty.longestLine()
 
   let uptime = getUptime()
-  let sysinfo: seq[tuple[label, value: string]] = @[("OS", getOSName()), ("Shell", getShell()), ("Kernel", getKernelVersion()), ("Uptime", ($uptime.days & "d " & $uptime.hours & "h " & $uptime.minutes & "m"))]
-  let longestSysinfoLabel = sysinfo.reduce(proc (info: tuple[label, value: string], maximum: int): int = max(len(info.label), maximum), 0)
-  assert sysinfo.len >= kitty.len
+  let sysinfo: seq[tuple[label, value: string]] = 
+    @[("OS", getOSName()),
+      ("Shell", getShell()),
+      ("Kernel", getKernelVersion()),
+      ("Uptime", ($uptime.days & "d " & $uptime.hours & "h " & $uptime.minutes & "m"))]
 
   #[TODO(refactor):
       - these prints can be capsulated into functions
       - add colors]#
   stdout.write repeat(" ", (longestLine + int(MARGIN_RIGHT))).join(), getUsername(), "@", getHostname(), "\n"
 
+  assert sysinfo.len >= kitty.len
   let n = sysinfo.len - kitty.len
+  let longestSysinfoLabel = sysinfo.reduce(proc (info: tuple[label, value: string], maximum: int): int = max(len(info.label), maximum), 0)
+
   for i in 0..n-1:
     stdout.write repeat(" ", (longestLine + int(MARGIN_RIGHT))).join()
     stdout.write sysinfo[i].label
