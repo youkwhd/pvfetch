@@ -1,4 +1,4 @@
-import kitty, sysinfo, std/sequtils, extension/sequtils, std/strutils
+import kitty, sysinfo, extension/sequtils, std/strutils
 
 const MARGIN_RIGHT: uint = 2
 
