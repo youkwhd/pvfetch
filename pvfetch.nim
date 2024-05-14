@@ -9,9 +9,9 @@ proc main =
   let uptime = getUptime()
   var uptimev = ""
 
-  if uptime.days > 0: uptimev = $uptime.days & "d "
-  if uptime.hours > 0: uptimev = $uptime.hours & "h "
-  uptimev = $uptime.minutes & "m"
+  if uptime.days > 0: uptimev &= $uptime.days & "d "
+  if uptime.hours > 0: uptimev &= $uptime.hours & "h "
+  uptimev &= $uptime.minutes & "m"
 
   let sysinfo: seq[tuple[color, label, value: string]] = 
     @[(YW, "OS", getOSName()),
