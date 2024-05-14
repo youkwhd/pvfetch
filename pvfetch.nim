@@ -7,11 +7,17 @@ proc main =
   let longestLine = kitty.longestLine()
 
   let uptime = getUptime()
+  var uptimev = ""
+
+  if uptime.days > 0: uptimev = $uptime.days & "d "
+  if uptime.hours > 0: uptimev = $uptime.hours & "h "
+  uptimev = $uptime.minutes & "m"
+
   let sysinfo: seq[tuple[label, value: string]] = 
     @[("OS", getOSName()),
       ("Shell", getShell()),
       ("Kernel", getKernelVersion()),
-      ("Uptime", ($uptime.days & "d " & $uptime.hours & "h " & $uptime.minutes & "m"))]
+      ("Uptime", uptimev)]
 
   #[TODO(refactor):
       - these prints can be capsulated into functions
