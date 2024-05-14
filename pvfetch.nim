@@ -3,8 +3,8 @@ import kitty, sysinfo, extension/sequtils, std/strutils
 const MARGIN_RIGHT: uint = 2
 
 proc main =
-  let kitty: Kitty = newKitty("extra/kitty/1")
-  let longestLine = kitty.longestLine()
+  let kitty = KITTIES[0]
+  let kittyArt = kitty.art.split("\n")
 
   let uptime = getUptime()
   var uptimev = ""
@@ -22,21 +22,22 @@ proc main =
   #[TODO(refactor):
       - these prints can be capsulated into functions
       - add colors]#
-  stdout.write repeat(" ", (longestLine + int(MARGIN_RIGHT))).join(), getUsername(), "@", getHostname(), "\n"
 
-  assert sysinfo.len >= kitty.len
-  let n = sysinfo.len - kitty.len
+  stdout.write repeat(" ", kitty.width + int(MARGIN_RIGHT)).join(), getUsername(), "@", getHostname(), "\n"
+
+  assert sysinfo.len >= kittyArt.len
+  let n = sysinfo.len - kittyArt.len
   let longestSysinfoLabel = sysinfo.reduce(proc (info: tuple[label, value: string], maximum: int): int = max(len(info.label), maximum), 0)
 
   for i in 0..n-1:
-    stdout.write repeat(" ", (longestLine + int(MARGIN_RIGHT))).join()
+    stdout.write repeat(" ", kitty.width + int(MARGIN_RIGHT)).join()
     stdout.write sysinfo[i].label
     stdout.write repeat(" ", (longestSysinfoLabel - len(sysinfo[i].label) + int(MARGIN_RIGHT))).join()
     stdout.write sysinfo[i].value, "\n"
 
-  for i, line in kitty:
+  for i, line in kittyArt:
     stdout.write line
-    stdout.write repeat(" ", (longestLine - len(line) + int(MARGIN_RIGHT))).join()
+    stdout.write repeat(" ", int(MARGIN_RIGHT)).join()
     stdout.write sysinfo[i + n].label
     stdout.write repeat(" ", (longestSysinfoLabel - len(sysinfo[i + n].label) + int(MARGIN_RIGHT))).join()
     stdout.write sysinfo[i + n].value, "\n"

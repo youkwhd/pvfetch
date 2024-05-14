@@ -1,20 +1,17 @@
-import std/streams, extension/sequtils
+import ansi, std/strformat
 
-type Kitty* = seq[string]
+type Kitty* = object
+  width*: int
+  art*: string
 
-proc newKitty*(fpath: string): Kitty =
-  let fstream: FileStream = newFileStream(fpath, fmRead)
-  if isNil(fstream):
-    quit(1)
+#[ Hard coding the width feels wrong,
+   but that's what I can afford for now ]#
 
-  var line: string
-  var kitty: Kitty
-
-  while fstream.readLine(line):
-    kitty.add(line)
-
-  fstream.close()
-  return kitty
-
-proc longestLine*(kitty: Kitty): int =
-  return kitty.reduce(proc (line: string, val: int): int = max(len(line), val), 0)
+const KITTIES* = [
+  Kitty(
+    width: 9,
+    art: fmt"""
+(>" "<)  
+( {RD}={RT}''{RD}={RT})  
+c(")-(")."""),
+]
