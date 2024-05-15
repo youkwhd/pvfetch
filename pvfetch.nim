@@ -14,19 +14,19 @@ proc main =
   uptimev &= $uptime.minutes & "m"
 
   let sysinfo: seq[tuple[color, label, value: string]] = 
-    @[(YW, "OS", getOSName()),
-      (CN, "Shell", getShell()),
-      (BE, "Kernel", getKernelVersion()),
-      (PE, "Uptime", uptimev)]
+    @[(ANSI_YELLOW, "OS", getOSName()),
+      (ANSI_CYAN, "Shell", getShell()),
+      (ANSI_BLUE, "Kernel", getKernelVersion()),
+      (ANSI_PURPLE, "Uptime", uptimev)]
 
   #[TODO(refactor):
       - these prints can be capsulated into functions
       - add colors]#
 
   stdout.write repeat(" ", kitty.width + int(MARGIN_RIGHT)).join(),
-               RD,
+               ANSI_RED,
                getUsername(), "@", getHostname(),
-               RT,
+               ANSI_RESET,
                "\n"
 
   assert sysinfo.len >= kittyArt.len
@@ -37,7 +37,7 @@ proc main =
     stdout.write repeat(" ", kitty.width + int(MARGIN_RIGHT)).join(),
                  sysinfo[i].color,
                  sysinfo[i].label,
-                 RT,
+                 ANSI_RESET,
                  repeat(" ", (longestSysinfoLabel - len(sysinfo[i].label) + int(MARGIN_RIGHT))).join(),
                  sysinfo[i].value,
                  "\n"
@@ -47,7 +47,7 @@ proc main =
                  repeat(" ", int(MARGIN_RIGHT)).join(),
                  sysinfo[i + n].color,
                  sysinfo[i + n].label,
-                 RT,
+                 ANSI_RESET,
                  repeat(" ", (longestSysinfoLabel - len(sysinfo[i + n].label) + int(MARGIN_RIGHT))).join(),
                  sysinfo[i + n].value,
                  "\n"
