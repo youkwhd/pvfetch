@@ -1,6 +1,8 @@
 import kitty, ansi, sysinfo, extension/sequtils, std/strutils
 
-const MARGIN_RIGHT: uint = 2
+const
+  MARGIN_RIGHT: uint = 2
+  MARGIN_LEFT: uint = 2
 
 proc main =
   let kitty = KITTIES[0]
@@ -23,7 +25,7 @@ proc main =
       - these prints can be capsulated into functions
       - add colors]#
 
-  stdout.write repeat(" ", kitty.width + int(MARGIN_RIGHT)).join(),
+  stdout.write repeat(" ", int(MARGIN_LEFT) + kitty.width + int(MARGIN_RIGHT)).join(),
                ANSI_RED,
                getUsername(), "@", getHostname(),
                ANSI_RESET,
@@ -34,7 +36,7 @@ proc main =
   let longestSysinfoLabel = sysinfo.reduce(proc (info: tuple[color, label, value: string], maximum: int): int = max(len(info.label), maximum), 0)
 
   for i in 0..n-1:
-    stdout.write repeat(" ", kitty.width + int(MARGIN_RIGHT)).join(),
+    stdout.write repeat(" ", int(MARGIN_LEFT) + kitty.width + int(MARGIN_RIGHT)).join(),
                  sysinfo[i].color,
                  sysinfo[i].label,
                  ANSI_RESET,
@@ -43,7 +45,8 @@ proc main =
                  "\n"
 
   for i, line in kittyArt:
-    stdout.write line,
+    stdout.write repeat(" ", int(MARGIN_LEFT)).join(),
+                 line,
                  repeat(" ", int(MARGIN_RIGHT)).join(),
                  sysinfo[i + n].color,
                  sysinfo[i + n].label,
