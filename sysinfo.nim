@@ -28,12 +28,12 @@ proc getUptime*: tuple[days, hours, minutes: int] =
                 .parseFloat()
 
   # One .. represented in seconds
-  let minuteInSecond: float = 60 * 1
-  let hourInSecond: float = 60 * minuteInSecond 
-  let dayInSecond: float = 24 * hourInSecond 
+  let oneMinute: float = 60 * 1
+  let oneHour: float = 60 * oneMinute 
+  let oneDay: float = 24 * oneHour 
 
-  let days = floor(uptime / dayInSecond)
-  let hours = floor((uptime - (days * dayInSecond)) / hourInSecond)
-  let minutes = floor((uptime - (days * dayInSecond) - (hours * hourInSecond)) / minuteInSecond)
+  let days: float = floor(uptime / oneDay)
+  let hours: float = floor((uptime - (days * oneDay)) / oneHour)
+  let minutes: float = floor((uptime - (days * oneDay) - (hours * oneHour)) / oneMinute)
 
   return (int(days), int(hours), int(minutes))
