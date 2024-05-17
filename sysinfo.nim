@@ -1,4 +1,4 @@
-import extension/envvars, std/envvars, std/strutils, std/paths, std/math
+import ext/envvars, std/envvars, std/strutils, std/paths, std/math
 
 proc getOSName*: string =
   let env = parseEnv(readFile("/etc/os-release").strip())
