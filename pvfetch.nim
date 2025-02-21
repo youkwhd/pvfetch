@@ -25,7 +25,7 @@ proc main =
       - these prints can be capsulated into functions
       - add colors]#
 
-  stdout.write repeat(" ", int(MARGIN_LEFT) + kittyLength+ int(MARGIN_RIGHT)).join(),
+  stdout.write repeat(" ", int(MARGIN_LEFT) + kittyLength + int(MARGIN_RIGHT)).join(),
                ANSI_RED,
                getUsername(), "@", getHostname(),
                ANSI_RESET,
