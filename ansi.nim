@@ -1,3 +1,5 @@
+import std/strutils
+
 const
     ANSI_BLACK* = "\e[0;30m"
     BK* = ANSI_BLACK
@@ -18,3 +20,15 @@ const
 
     ANSI_RESET* = "\e[0m"
     RT* = ANSI_RESET
+
+proc isAnsiCode*(str: string): bool =
+  if not str.startsWith("\e["):
+    return false
+
+  return str.contains("m")
+
+proc ansiCodeLength*(str: string): int =
+  if not isAnsiCode(str):
+    return 0
+
+  return str.find("m") + 1

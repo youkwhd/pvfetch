@@ -6,7 +6,7 @@ const
 
 proc main =
   let kitty = KITTIES[0]
-  let kittyArt = kitty.art.split("\n")
+  let kittyLength = kittyWidth(kitty)
 
   let uptime = getUptime()
   var uptimev = ""
@@ -25,18 +25,20 @@ proc main =
       - these prints can be capsulated into functions
       - add colors]#
 
-  stdout.write repeat(" ", int(MARGIN_LEFT) + kitty.width + int(MARGIN_RIGHT)).join(),
+  stdout.write repeat(" ", int(MARGIN_LEFT) + kittyLength+ int(MARGIN_RIGHT)).join(),
                ANSI_RED,
                getUsername(), "@", getHostname(),
                ANSI_RESET,
                "\n"
 
-  assert sysinfo.len >= kittyArt.len
-  let n = sysinfo.len - kittyArt.len
+  let kittyLines = kitty.split("\n")
+
+  assert sysinfo.len >= kittyLines.len
+  let n = sysinfo.len - kittyLines.len
   let longestSysinfoLabel = sysinfo.reduce(proc (info: tuple[color, label, value: string], maximum: int): int = max(len(info.label), maximum), 0)
 
   for i in 0..n-1:
-    stdout.write repeat(" ", int(MARGIN_LEFT) + kitty.width + int(MARGIN_RIGHT)).join(),
+    stdout.write repeat(" ", int(MARGIN_LEFT) + kittyLength + int(MARGIN_RIGHT)).join(),
                  sysinfo[i].color,
                  sysinfo[i].label,
                  ANSI_RESET,
@@ -44,7 +46,7 @@ proc main =
                  sysinfo[i].value,
                  "\n"
 
-  for i, line in kittyArt:
+  for i, line in kittyLines:
     stdout.write repeat(" ", int(MARGIN_LEFT)).join(),
                  line,
                  repeat(" ", int(MARGIN_RIGHT)).join(),
